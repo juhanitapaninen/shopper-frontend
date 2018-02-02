@@ -3,14 +3,16 @@ import gql from 'graphql-tag'
 
 const POSTS_PER_PAGE = 10
 
-function ShoppingList({data: {loading,error,items}}) {
+function ShoppingList({data: {loading,error,nextShoppingList}}) {;
+  const {items} = nextShoppingList;
   if (error) 
     return <div>Error loading items.</div>
-    if (items && items.length) {
+    if (items && items.length > 0) {
     return (
       <section>
         <ul>
-          {items.map(item =>
+        {
+          items.map(({item}) =>
             <li key={item.id}>
               <div>{item.name}</div>
             </li>
@@ -23,12 +25,15 @@ function ShoppingList({data: {loading,error,items}}) {
 }
 
 const items = gql `
-  {
+{
+  nextShoppingList {
+    name,
+    target,
     items {
-      id,
-      name
+      item {id,name}
     }
   }
+}
 `;
 
 // The `graphql` wrapper executes a GraphQL query and makes the results
