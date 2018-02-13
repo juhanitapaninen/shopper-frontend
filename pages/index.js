@@ -1,4 +1,4 @@
-import {Provider, Container, Heading, colors} from 'rebass';
+import {Provider, Container, Heading, colors as palxColors} from 'rebass';
 import styled, {injectGlobal} from 'styled-components';
 import withData from '../utils/withData';
 import ShoppingList from '../components/ShoppingList';
@@ -26,6 +26,7 @@ injectGlobal `
     padding: 0;
     border: 0;
     font-size: 100%;
+    width: auto;
     font: inherit;
     vertical-align: baseline;
   }
@@ -52,22 +53,31 @@ injectGlobal `
     border-collapse: collapse;
     border-spacing: 0;
   }
+  html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
 `;
 
 const theme = {
   colors : {
     black: '#000',
     white: '#fff',
-    gray: colors.gray2,
-    hover: colors.gray1
+    gray: palxColors.gray2,
+    hover: palxColors.gray1,
+    defaultButton: palxColors.blue5,
+    activeButton: palxColors.blue6,
+    checkedButton: palxColors.blue3,
+    ...palxColors
   },
 };
-
 
 export default withData((props) => (
   <Provider theme={theme}>
     <Container>
-      <Heading f={[ 6, 8 ]} center>Ostoslista</Heading>
+      <Heading f={[ 5, 6, 7, 8 ]} center>Ostoslista</Heading>
       <ShoppingList />
     </Container>
   </Provider>

@@ -21,7 +21,7 @@ function create(initialState) {
         credentials: 'same-origin' // Additional fetch() options like `credentials` or `headers`
       }
     }),
-    cache: new InMemoryCache().restore(initialState || {})
+    cache: new InMemoryCache({dataIdFromObject: o => o.id}).restore(initialState || {})
   })
 }
 
