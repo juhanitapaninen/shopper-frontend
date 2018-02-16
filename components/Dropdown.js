@@ -2,7 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import {graphql} from "react-apollo";
 import query from '../queries/Items';
-import { Container, Input, Text, Border } from 'rebass';
+import { Input, Text, Border } from 'rebass';
 
 class Dropdown extends Component {
 
@@ -43,10 +43,10 @@ class Dropdown extends Component {
         <Input
           f={[ 2, 3, 4, 5 ]}
           py={2}
+          my={2}
           defaultValue={this.state.inputValue}
           placeholder={placeholder}
           onChange={this.changeInputValue}
-          onFocus={this.showMenu}
           onKeyPress={this.handleKeyPress}
         />
         {
