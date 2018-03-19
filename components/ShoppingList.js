@@ -72,34 +72,30 @@ class ShoppingList extends Component {
 
   render() {
     const {loading, error, nextShoppingList} = this.props.data;
+    if (error) return <div>Error loading items.</div>;
+    if (loading) return <div>Loading</div>;
     const {items} = nextShoppingList;
-    if (error) {
-      return <div>Error loading items.</div>
-    }
-    if (!loading) {
-      return (
-        <Container>
-          <List width={1}>
-          {
-            items.map(({item, id, completed}) =>
-              <ListRow width={1/2} key={item.id}>
-                <RowEdge f={[ 2, 3, 4, 5 ]} color={completed ? 'green' : 'black'}>
-                  <CheckButton onClick={this.toggleCompleted({id, completed})}><CheckIcon /></CheckButton>
-                </RowEdge>
-                <RowCenter>
-                  <Text f={[ 2, 3, 4, 5 ]} color={completed ? 'green' : 'black'}>{item.name}</Text>
-                </RowCenter>
-                <RowEdge f={[ 2, 3, 4, 5 ]}>
-                  <RemoveButton onClick={e => console.log(e)}><RemoveIcon /></RemoveButton>
-                </RowEdge>
-              </ListRow>
-            )}
-            <Dropdown onSelect={this.handleSelect} />
-          </List>
-        </Container>
-      );
-    }
-    return <div>Loading</div>
+    return (
+      <Container>
+        <List width={1}>
+        {
+          items.map(({item, id, completed}) =>
+            <ListRow width={1/2} key={item.id}>
+              <RowEdge f={[ 2, 3, 4, 5 ]} color={completed ? 'green' : 'black'}>
+                <CheckButton onClick={this.toggleCompleted({id, completed})}><CheckIcon /></CheckButton>
+              </RowEdge>
+              <RowCenter>
+                <Text f={[ 2, 3, 4, 5 ]} color={completed ? 'green' : 'black'}>{item.name}</Text>
+              </RowCenter>
+              <RowEdge f={[ 2, 3, 4, 5 ]}>
+                <RemoveButton onClick={e => console.log(e)}><RemoveIcon /></RemoveButton>
+              </RowEdge>
+            </ListRow>
+          )}
+          <Dropdown onSelect={this.handleSelect} />
+        </List>
+      </Container>
+    );
   }
 }
 
